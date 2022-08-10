@@ -4,6 +4,7 @@ const path = require('path')
 
 const indexRouter = require('./routes/index')
 const aboutRouter = require('./routes/about')
+const contactRouter = require('./routes/contact')
 
 const PORT = process.env.PORT ?? 3000
 
@@ -16,5 +17,6 @@ app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
 app.use(indexRouter)
 app.use('/about', aboutRouter)
+app.use('/contact', contactRouter)
 
 app.listen(PORT, () => console.log(`Listening at port ${PORT}`))
