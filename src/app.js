@@ -10,8 +10,9 @@ const app = express()
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
+app.set('layout', 'layouts/layout')
 
-app.use(indexRouter)
 app.use(expressLayouts)
+app.use(indexRouter)
 
 app.listen(PORT, () => console.log(`Listening at port ${PORT}`))
