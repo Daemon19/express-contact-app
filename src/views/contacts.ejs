@@ -1,7 +1,6 @@
-<div class="container pt-3">
-    <div class="row">
-        <div class="col-md-8">
-            <h2>Daftar Kontak</h2>
+<div class="row">
+    <div class="col-md-8">
+        <h2>Daftar Kontak</h2>
         <% if (!contacts.length) { %>
             <div class="alert alert-danger fw-bold fs-5" role="alert">
                 Kamu belum memiliki kontak apa pun!
@@ -32,6 +31,6 @@
                     <% }) %>
                 </tbody>
             </table>
-        </div>
+        <% } %>
     </div>
 </div>
