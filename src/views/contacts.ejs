@@ -2,6 +2,11 @@
     <div class="row">
         <div class="col-md-8">
             <h2>Daftar Kontak</h2>
+        <% if (!contacts.length) { %>
+            <div class="alert alert-danger fw-bold fs-5" role="alert">
+                Kamu belum memiliki kontak apa pun!
+            </div>
+        <% } else { %>
             <table class="table">
                 <thead>
                     <tr>
