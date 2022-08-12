@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-6">
+        <h2>Form Tambah Kontak</h2>
+        <form action="/contacts" method="post">
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama</label>
+                <input type="text" class="form-control" name="nama" id="nama"
+                    placeholder="Daemon" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail <span
+                        class="text-secondary">(opsional)</span></label>
+                <input class="form-control" type="email" name="email" id="email"
+                    placeholder="contoh@email.com">
+            </div>
+            <div class="mb-3">
+                <label for="noHp" class="form-label">No. HP</label>
+                <input class="form-control" type="tel" name="noHp" id="noHp"
+                    placeholder="08XXXXXXXXXX" required>
+            </div>
+                <button type="submit" class="btn btn-primary">Tambah kontak</button>
+        </form>
+    </div>
+</div>
