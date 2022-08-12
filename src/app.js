@@ -17,6 +17,7 @@ app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
 app.use(indexRouter)
 app.use('/about', aboutRouter)
-app.use('/contact', contactRouter)
+app.use('/contacts', contactRouter)
+app.use((req, res) => res.status(404).send('<h1>404</h1>'))
 
 app.listen(PORT, () => console.log(`Listening at port ${PORT}`))
