@@ -4,6 +4,12 @@
 
         <a href="/contacts/add" class="btn btn-primary mb-2">Tambah kontak</a>
 
+        <% if (msg.length) { %>
+            <div class="alert alert-success" role="alert">
+                <%= msg %>
+            </div>
+        <% } %>
+
         <% if (!contacts.length) { %>
             <div class="alert alert-danger fw-bold fs-5" role="alert">
                 Kamu belum memiliki kontak apa pun!
@@ -25,7 +31,7 @@
                             <td><%= contact.nama %></td>
                             <td><%= contact.noHp %></td>
                             <td>
-                                <a href="/contacts/<%= contact.id %>"
+                                <a href="/contacts/<%= contact.nama %>"
                                     class="btn btn-success badge rounded-pill">
                                     <i class="bi bi-info-circle"></i>
                                     Detail</a>

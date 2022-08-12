@@ -1,25 +1,55 @@
 const express = require('express')
-const { loadContacts, findContact, addContact } = require('../utils/contacts')
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
+const flash = require('connect-flash')
+const { body, check, validationResult } = require('express-validator')
+const { loadContacts, findContact, addContact, cekDuplikat } = require('../utils/contacts')
 
 const router = express.Router()
 
+// Konfigurasi flash
+router.use(cookieParser('secret'))
+router.use(session({
+  cookie: { maxAge: 6000 },
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}))
+router.use(flash())
+
 router.get('/', (req, res) => {
   const contacts = loadContacts()
-  res.render('contacts', { contacts })
+  res.render('contacts', { contacts, msg: req.flash('msg') })
 })
 
 router.get('/add', (req, res) => {
   res.render('add-contact')
 })
 
-router.post('/', (req, res) => {
-  console.log(req.body)
+router.post('/', [
+  body('nama').custom((value) => {
+    const duplikat = cekDuplikat(value)
+    if (duplikat) {
+      throw new Error('Nama kontak telah digunakan!')
+    }
+    return true
+  }),
+  check('email', 'E-mail tidak valid!').optional({ checkFalsy: true }).isEmail(),
+  check('noHp', 'No. HP tidak valid!').isMobilePhone('id-ID')
+],
+(req, res) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.render('add-contact', { errors: errors.array() })
+  }
+
   addContact(req.body)
+  req.flash('msg', 'Kontak berhasil ditambahkan!')
   res.redirect('/contacts')
 })
 
-router.get('/:id', (req, res) => {
-  const contact = findContact(req.params.id)
+router.get('/:nama', (req, res) => {
+  const contact = findContact(req.params.nama)
   res.render('contact', { contact })
 })
 

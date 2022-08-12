@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const { nanoid } = require('nanoid')
 
 const DIR_PATH = './data'
 if (!fs.existsSync(DIR_PATH)) {
@@ -18,15 +17,19 @@ const loadContacts = () => {
   return contacts
 }
 
-const findContact = (id) => loadContacts().find(contact => contact.id === id)
+const findContact = (nama) => loadContacts().find(contact => contact.nama === nama)
 
 const saveContacts = (contacts) => fs.writeFileSync(DATA_PATH, JSON.stringify(contacts))
 
 const addContact = (contact) => {
   const contacts = loadContacts()
-  const id = nanoid()
-  contacts.push({ id, ...contact })
+  contacts.push(contact)
   saveContacts(contacts)
 }
 
-module.exports = { loadContacts, findContact, addContact }
+const cekDuplikat = (nama) => {
+  const contacts = loadContacts()
+  return contacts.find((contact) => contact.nama === nama) !== undefined
+}
+
+module.exports = { loadContacts, findContact, addContact, cekDuplikat }
