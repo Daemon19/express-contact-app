@@ -13,6 +13,8 @@
                     <h5 class="card-title"><%= contact.nama %></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><%= contact.noHp %></h6>
                     <p class="card-text"><%= contact.email %></p>
+                    <a href="/contacts/edit/<%= contact.nama %>"
+                        class="btn btn-info badge">Ubah</a>
                     <a href="/contacts/delete/<%= contact.nama %>"
                         onclick="return confirm('Yakin?')"
                         class="btn btn-danger badge">Hapus</a>

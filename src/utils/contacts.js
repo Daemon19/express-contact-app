@@ -47,4 +47,22 @@ const deleteContact = (nama) => {
   return true
 }
 
-module.exports = { loadContacts, findContact, addContact, cekDuplikat, deleteContact }
+const updateContact = (contactBaru, namaLama) => {
+  const contacts = loadContacts()
+  const index = contacts.findIndex((contact) => contact.nama === namaLama)
+  if (index === -1) {
+    return false
+  }
+  contacts[index] = contactBaru
+  saveContacts(contacts)
+  return true
+}
+
+module.exports = {
+  loadContacts,
+  findContact,
+  addContact,
+  cekDuplikat,
+  deleteContact,
+  updateContact
+}
