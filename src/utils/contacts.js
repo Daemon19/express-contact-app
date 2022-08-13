@@ -32,4 +32,19 @@ const cekDuplikat = (nama) => {
   return contacts.find((contact) => contact.nama === nama) !== undefined
 }
 
-module.exports = { loadContacts, findContact, addContact, cekDuplikat }
+/**
+ * @param {string} nama
+ * @return {boolean} true jika kontak ditemukan
+ */
+const deleteContact = (nama) => {
+  const contacts = loadContacts()
+  const index = contacts.findIndex((contact) => contact.nama === nama)
+  if (index === -1) {
+    return false
+  }
+  contacts.splice(index, 1)
+  saveContacts(contacts)
+  return true
+}
+
+module.exports = { loadContacts, findContact, addContact, cekDuplikat, deleteContact }

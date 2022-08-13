@@ -3,7 +3,7 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 const { body, check, validationResult } = require('express-validator')
-const { loadContacts, findContact, addContact, cekDuplikat } = require('../utils/contacts')
+const { loadContacts, findContact, addContact, cekDuplikat, deleteContact } = require('../utils/contacts')
 
 const router = express.Router()
 
@@ -45,6 +45,14 @@ router.post('/', [
 
   addContact(req.body)
   req.flash('msg', 'Kontak berhasil ditambahkan!')
+  res.redirect('/contacts')
+})
+
+router.get('/delete/:nama', (req, res) => {
+  if (!deleteContact(req.params.nama)) {
+    res.status(404).send('<h1>Kontak tidak ditemukan!</h1>')
+  }
+  req.flash('msg', 'Kontak berhasil dihapus!')
   res.redirect('/contacts')
 })
 
